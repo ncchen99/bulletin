@@ -1,0 +1,26 @@
+.my-send-btn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 40px !important;
+  min-width: 100%;
+  height: 100px;
+}
+
+.my-send-btn span {
+  left: 30px;
+}
+
+.my-send-card {
+  padding: 0px;
+  height: 100px;
+  min-width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0px;
+  margin-top: 50px;
+}
+
+label {
+  font-size: 14px;
+}
