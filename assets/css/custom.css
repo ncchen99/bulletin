@@ -21,6 +21,6 @@
   margin-top: 50px;
 }
 
-label {
-  font-size: 14px;
+.form-input label {
+  font-size: 16px;
 }
