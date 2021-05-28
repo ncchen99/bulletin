@@ -191,7 +191,7 @@ $("#send-form > div.modal-footer > div > button:nth-child(2)").click(
     user_data["post"].push(values);
 
     // reset Form
-    $(this).closest("form").find("input[type=text], textarea").val("");
+    $(this).closest("form").find("input, textarea").val("");
     // store Cookie
     Cookies.set("user_data", JSON.stringify(user_data));
 
@@ -240,7 +240,7 @@ $("").click(function () {});
 
     if (user == null || user == "") {
       $("#text_under_title").text("\u00A0\u00A0快來創建自己的留言板🚀");
-      $(".preloader").fadeOut(350);
+      $(".preloader").fadeOut(200);
     } else {
       // query user data
       db.collection("users")
