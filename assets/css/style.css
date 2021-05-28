@@ -2643,7 +2643,7 @@ p {
 }
 .form-input .input-items textarea {
   padding-top: 8px;
-  height: 130px;
+  height: 150px;
   resize: none;
 }
 .form-input .input-items i {
@@ -3238,6 +3238,7 @@ p {
 }
 .slider-content .slider-btn li a.rounded-two {
   border-color: #fff;
+  color: #fff;
 }
 .slider-content .slider-btn li a.rounded-two:hover {
   background-color: #fff;
@@ -3350,8 +3351,8 @@ p {
 /*===== features TWO =====*/
 .features-area {
   background-color: #f4f6f7;
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 80px;
+  padding-bottom: 80px;
 }
 
 .single-features {
@@ -4202,7 +4203,7 @@ p.form-message.error.form-message.error {
   padding-top: 21px;
 }
 .footer-area .footer-support span {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 24px;
   color: #121212;
   font-weight: 600;

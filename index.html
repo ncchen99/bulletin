@@ -5,9 +5,9 @@
   <meta charset="utf-8">
 
   <!--====== Title ======-->
-  <title>Smash - Bootstrap Business Template</title>
+  <title>留言板｜文華三十</title>
 
-  <meta name="description" content="">
+  <meta name="description" content="0607🚸《一起逃出烤箱，來一場冒險之旅吧！》">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!--====== Favicon Icon ======-->
@@ -91,7 +91,7 @@
             </div>
             <div class="navbar-btn">
               <ul>
-                <li><a class="solid" href="#">保存留言</a></li>
+                <li><a class="solid" href="javascript:viod(0)" id="save_img">保存留言</a></li>
               </ul>
             </div>
             <!-- <div class="navbar-btn d-none d-sm-inline-block">
@@ -121,9 +121,9 @@
                   <h2 class="title" id="title">留言板</h2>
                   <p class="text" id="text_under_title">
                     &nbsp&nbsp快快下去留言窩🦀</p>
-                  <ul class="slider-btn rounded-buttons">
-                    <li><a class="main-btn rounded-one " href="#">創造留言板</a></li>
-                    <li><a class="main-btn rounded-two " href="#">進入留言板</a></li>
+                  <ul class="slider-btn light-rounded-buttons">
+                    <li><a class="main-btn rounded-one" data-toggle="modal" data-target="#createModal">創造留言板</a></li>
+                    <li><a class="main-btn rounded-two" data-toggle="modal" data-target="#enterModal">進入留言板</a></li>
                   </ul>
                 </div>
               </div>
@@ -159,7 +159,7 @@
                 <div class="testimonial-author d-sm-flex justify-content-between">
                   <div class="author-info d-flex align-items-center">
                     <div class="author-image">
-                      <img src="assets/images/author-1.jpg" alt="author">
+                      <img src="./assets/images/user-1.png" alt="author">
                     </div>
                     <div class="author-name media-body">
                       <h5 class="name">製作者</h5>
@@ -167,20 +167,20 @@
                     </div>
                   </div>
                   <!--<div class="author-review">
-                                                <ul class="star">
-                                                    <li><i class="lni lni-star-filled"></i>
-                                                    </li>
-                                                    <li><i class="lni lni-star-filled"></i>
-                                                    </li>
-                                                    <li><i class="lni lni-star-filled"></i>
-                                                    </li>
-                                                    <li><i class="lni lni-star-filled"></i>
-                                                    </li>
-                                                    <li><i class="lni lni-star-filled"></i>
-                                                    </li>
-                                                </ul>
-                                                <span class="review">( 7 Reviews )</span>
-                                            </div>-->
+                        <ul class="star">
+                            <li><i class="lni lni-star-filled"></i>
+                            </li>
+                            <li><i class="lni lni-star-filled"></i>
+                            </li>
+                            <li><i class="lni lni-star-filled"></i>
+                            </li>
+                            <li><i class="lni lni-star-filled"></i>
+                            </li>
+                            <li><i class="lni lni-star-filled"></i>
+                            </li>
+                        </ul>
+                        <span class="review">( 7 Reviews )</span>
+                    </div>-->
                 </div>
               </div>
             </div>
@@ -191,24 +191,25 @@
   </section>
 
   <!--====== FEATRES TWO PART ENDS ======-->
-  <!--====== MODAL PART START ======-->
+  <!--====== SEND MODAL PART START ======-->
   <div class="modal fade" id="sendModal" tabindex="-1" role="dialog" aria-labelledby="sendModalLabel" aria-modal="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"> <i class="lni lni-envelope"></i> Leave
-            <span>A Message.</span>
+          <h5 class="modal-title" id="exampleModalLabel"> <i class="lni lni-envelope"></i>
+            留言
           </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">
-          <div class="contact-wrapper form-style-two">
-            <form id="contact-form" action="assets/contact.php" method="post">
+        <form id="send-form">
+          <div class="modal-body">
+            <div class="contact-wrapper form-style-two">
+
               <div class="row">
                 <div class="col-md-6">
-                  <div class="form-input mt-25">
+                  <div class="form-input mt-15">
                     <label>💳尼の名字</label>
                     <div class="input-items default">
                       <input name="name" type="text" placeholder="Name">
@@ -217,7 +218,7 @@
                   </div> <!-- form input -->
                 </div>
                 <div class="col-md-6">
-                  <div class="form-input mt-25">
+                  <div class="form-input mt-15">
                     <label>📧伊媚兒</label>
                     <div class="input-items default">
                       <input type="email" name="email" placeholder="Email">
@@ -229,31 +230,113 @@
                   <div class="form-input mt-25">
                     <label>😻留言內容</label>
                     <div class="input-items default">
-                      <textarea name="massage" placeholder="Massage"></textarea>
+                      <textarea name="content" placeholder="Massage"></textarea>
                       <i class="lni lni-pencil-alt"></i>
                     </div>
                   </div> <!-- form input -->
                 </div>
-                <!-- <div class="col-md-12">
-                  <div class="form-input light-rounded-buttons mt-30">
-                    <button class="main-btn light-rounded-two">Send
-                      Message</button>
-                  </div> form input -->
               </div>
               <!-- row -->
-            </form>
+            </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <div class="light-rounded-buttons"><button type="button" class="main-btn light-rounded-five"
-              data-dismiss="modal"><span class="lni lni-trash-can"></span><span class="lni lni-exit"></span>取消</button>
-            <button type="button" class="main-btn light-rounded-five"><span class="lni lni-save"></span>留言</button>
+          <div class="modal-footer">
+            <div class="light-rounded-buttons"><button type="button" class="main-btn light-rounded-five"
+                data-dismiss="modal"><span class="lni lni-trash-can"></span><span
+                  class="lni lni-exit"></span>取消</button>
+              <button type="submit" class="main-btn light-rounded-five"><span class="lni lni-save"></span>留言</button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
-  <!--====== MODAL PART END ======-->
+  <!--====== SEND MODAL PART END ======-->
+
+  <!--====== CREATE MODAL PART START ======-->
+  <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
+    aria-modal="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createModalLabel"> <i class="lni lni-envelope"></i>
+            創造留言板
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <form id="create-form">
+          <div class="modal-body">
+            <div class="contact-wrapper form-style-two">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-input mt-15">
+                    <label>💳尼の名字</label>
+                    <div class="input-items default">
+                      <input name="user" type="text" placeholder="名字不能忘記窩🥺">
+                      <i class="lni lni-user"></i>
+                    </div>
+                  </div> <!-- form input -->
+                </div>
+              </div>
+              <!-- row -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="light-rounded-buttons"><button type="button" class="main-btn light-rounded-five"
+                data-dismiss="modal"><span class="lni lni-trash-can"></span><span
+                  class="lni lni-exit"></span>取消</button>
+              <button type="submit" class="main-btn light-rounded-five"><span class="lni lni-save"></span>做一個💕</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--====== CREAT MODAL PART END ======-->
+
+  <!--====== ENTER MODAL PART START ======-->
+  <div class="modal fade" id="enterModal" tabindex="-1" role="dialog" aria-labelledby="enterModalLabel"
+    aria-modal="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="enterModalLabel"> <i class="lni lni-envelope"></i>
+            進入留言板
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <form id="enter-form">
+          <div class="modal-body">
+            <div class="contact-wrapper form-style-two">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-input mt-15">
+                    <label>💳尼の名字</label>
+                    <div class="input-items default">
+                      <input name="p" type="text" placeholder="嗨嗨🌞">
+                      <i class="lni lni-user"></i>
+                    </div>
+                  </div> <!-- form input -->
+                </div>
+              </div>
+              <!-- row -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="light-rounded-buttons"><button type="button" class="main-btn light-rounded-five"
+                data-dismiss="modal"><span class="lni lni-trash-can"></span><span
+                  class="lni lni-exit"></span>取消</button>
+              <button type="submit" class="main-btn light-rounded-five"><span class="lni lni-enter"></span>逃粗來</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--====== ENTER MODAL PART END ======-->
 
   <!--====== FOOTER PART START ======-->
 
@@ -262,14 +345,15 @@
       <div class="row justify-content-center">
         <div class="col-lg-6">
           <ul class="social text-center mt-60">
-            <li><a href="https://facebook.com/uideckHQ"><i class="lni lni-facebook-filled"></i></a></li>
-            <li><a href="https://twitter.com/uideckHQ"><i class="lni lni-twitter-original"></i></a></li>
-            <li><a href="https://instagram.com/uideckHQ"><i class="lni lni-instagram-original"></i></a></li>
-            <li><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
+            <li><a href="https://www.instagram.com/whsh30_rungrad/"><i class="lni lni-instagram-original"></i></a></li>
+            <li><a href="https://www.facebook.com/whshtw/"><i class="lni lni-facebook-filled"></i></a></li>
+            <li><a href="https://github.com/ncchen99/bulletin"><i class="lni lni-github-original"></i></a></li>
+            <li><a href="https://whcsc.github.io/"><i class="lni lni-website"></i></a></li>
           </ul> <!-- social -->
           <div class="footer-support text-center">
-            <span class="number">聯絡電話</span>
-            <span class="mail">s710436@whsh.tc.edu.tw</span>
+            <span>這個網頁如果爛掉不能用惹，請來聯絡畢籌會活動組，不好意思😓</span>
+            <span>文華高中30屆畢籌會</span>
+            <span>0607🚸《一起逃出烤箱，來一場冒險之旅吧！》</span>
           </div>
           <div class="copyright text-center mt-35">
             <p class="text">Designed by <a href="https://uideck.com" rel="nofollow">UIdeck</a> and
@@ -344,7 +428,13 @@
         https://firebase.google.com/docs/web/setup#available-libraries -->
   <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-analytics.js"></script>
 
-  <!--====== Bulltin js ======-->
+  <!--====== JS Cookie js ======-->
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+  <!--====== html2canvas js ======-->
+  <script src="./assets/js/html2canvas.js"></script>
+
+  <!--======Bulltin js======-->
   <script src="assets/js/bulletin.js"></script>
 
 </body>
