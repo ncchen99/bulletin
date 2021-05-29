@@ -62,7 +62,7 @@ function make_card(post) {
     `" alt="author">
                       </div>
                       <div class="author-name media-body">
-                          <h5 class="name">` +
+                          <h5 class="name mt-10">` +
     post["name"] +
     `</h5>
                           <span class="sub-title">` +
@@ -311,6 +311,11 @@ $("#send-form > div.modal-footer > div > button:nth-child(2)").click(
             .replace(/</g, "&lt;")
             .replace(/>/g, "&gt;");
         } else {
+          show_error_input(
+            $(this).parent("div").selector,
+            "這格不能空白窩🥺",
+            $(this).attr("placeholder")
+          );
           alert("每一格都要填窩🥺");
           // todo change alret to input error
           input_valid = false;
