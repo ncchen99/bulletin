@@ -19,6 +19,11 @@ function init_database() {
   firebase.analytics();
 }
 
+//get random int
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
 // html2canvas
 function saveAs(uri, filename) {
   var link = document.createElement("a");
@@ -61,7 +66,7 @@ function make_card(post) {
     post["name"] +
     `</h5>
                           <span class="sub-title">` +
-    post["email"] +
+    ("time" in post ? post["time"] : post["email"]) +
     `</span>
                       </div>
                   </div>
@@ -242,7 +247,6 @@ $("#create-form > div.modal-footer > div > button:nth-child(2)").click(
                         "data-content",
                         "趕快去分享吧！"
                       );
-
                       $("#create-form button:nth-child(1)").popover();
                     },
                     function (err) {
@@ -254,7 +258,6 @@ $("#create-form > div.modal-footer > div > button:nth-child(2)").click(
                         "data-content",
                         "複製的功能只能用Chromeㄛ"
                       );
-
                       $("#create-form button:nth-child(1)").popover();
 
                       console.error("Async: Could not copy text: ", err);
@@ -309,6 +312,7 @@ $("#send-form > div.modal-footer > div > button:nth-child(2)").click(
             .replace(/>/g, "&gt;");
         } else {
           alert("每一格都要填窩🥺");
+          // todo change alret to input error
           input_valid = false;
           return false;
         }
@@ -317,7 +321,11 @@ $("#send-form > div.modal-footer > div > button:nth-child(2)").click(
     if (!input_valid) return false;
 
     //start animation meanwhile store data and display it
-    values["img"] = default_avatars;
+    values["img"] =
+      "./assets/images/user/user-" + (getRandomInt(5) + 1) + ".png";
+    var d = new Date();
+    values["time"] =
+      d.getFullYear() + "年 " + d.getMonth() + "月 " + d.getDate() + "日";
     $(".preloader").fadeIn(200);
     user_data["post"].push(values);
 
