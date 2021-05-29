@@ -55,20 +55,24 @@ function make_card(post) {
     `</p>
               </div>
               <div class="testimonial-author d-sm-flex justify-content-between">
-                  <div class="author-info d-flex align-items-center">
-                      <div class="author-image">
+                  <div class="author-info d-flex align-items-center">` +
+    ("fb" in post
+      ? `<a href="` + post["fb"] + `">`
+      : `<a href="mailto:` + post["email"] + `">`) +
+    `<div class="author-image">
                           <img src="` +
     post["img"] +
     `" alt="author">
-                      </div>
-                      <div class="author-name media-body">
-                          <h5 class="name mt-10">` +
+                        </div>
+                        <div class="author-name media-body">
+                            <h5 class="card-author-name name mt-10">` +
     post["name"] +
     `</h5>
-                          <span class="sub-title">` +
+                            <span class="sub-title">` +
     ("time" in post ? post["time"] : post["email"]) +
     `</span>
-                      </div>
+                        </div>
+                      </a> 
                   </div>
               </div>
           </div>

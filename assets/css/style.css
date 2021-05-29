@@ -3863,13 +3863,14 @@ p {
   background-color: #fff;
   padding: 35px 30px 35px;
   border-radius: 40px;
-  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 15%);
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 15%);
   transition: all 0.3s ease-out 0s;
   margin-bottom: 50px;
   min-width: 100%;
 }
 .single-testimonial:hover {
   box-shadow: 0 20px 25px rgb(0 0 0 / 15%);
+  transform: translateY(-6px);
 }
 
 .single-testimonial .testimonial-text .text {
@@ -3901,6 +3902,7 @@ p {
   font-weight: 700;
   color: #121212;
 }
+
 .single-testimonial .testimonial-author .author-info .author-name .sub-title {
   font-size: 14px;
   color: #a4a4a4;
