@@ -57,8 +57,8 @@ function make_card(post) {
               <div class="testimonial-author d-sm-flex justify-content-between">
                   <div class="author-info d-flex align-items-center">` +
     ("fb" in post
-      ? `<a href="` + post["fb"] + `">`
-      : `<a href="mailto:` + post["email"] + `">`) +
+      ? `<a class="my-a" href="` + post["fb"] + `">`
+      : `<a class="my-a" href="mailto:` + post["email"] + `">`) +
     `<div class="author-image">
                           <img src="` +
     post["img"] +
