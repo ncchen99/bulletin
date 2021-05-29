@@ -325,7 +325,7 @@ $("#send-form > div.modal-footer > div > button:nth-child(2)").click(
       "./assets/images/user/user-" + (getRandomInt(5) + 1) + ".png";
     var d = new Date();
     values["time"] =
-      d.getFullYear() + "年 " + d.getMonth() + "月 " + d.getDate() + "日";
+      d.getFullYear() + "年 " + (d.getMonth() + 1) + "月 " + d.getDate() + "日";
     $(".preloader").fadeIn(200);
     user_data["post"].push(values);
 
