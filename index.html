@@ -34,6 +34,9 @@
   <!--====== loading CSS ======-->
   <link rel="stylesheet" href="assets/css/loading.css">
 
+  <!--====== Print CSS ======-->
+  <link rel="stylesheet" type="text/css" media="print" href="assets/css/print.css">
+
   <!--====== Custom CSS ======-->
   <link rel="stylesheet" href="assets/css/custom.css">
 </head>
@@ -91,7 +94,7 @@
             </div>
             <div class="navbar-btn">
               <ul>
-                <li><a class="solid" href="javascript:viod(0)" id="save_img">保存留言</a></li>
+                <li><a class="solid" href="javascript:viod(0)" id="save_page">列印留言</a></li>
               </ul>
             </div>
             <!-- <div class="navbar-btn d-none d-sm-inline-block">
@@ -122,8 +125,10 @@
                   <p class="text" id="text_under_title">
                     &nbsp&nbsp快快下去留言窩🦀</p>
                   <ul class="slider-btn light-rounded-buttons">
-                    <li><a class="main-btn rounded-one" data-toggle="modal" data-target="#createModal">創造留言板</a></li>
-                    <li><a class="main-btn rounded-two" data-toggle="modal" data-target="#enterModal">進入留言板</a></li>
+                    <li><a class="main-btn rounded-one" data-toggle="modal" data-target="#createModal">創造留言板</a>
+                    </li>
+                    <li><a class="main-btn rounded-two" data-toggle="modal" data-target="#enterModal">進入留言板</a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -153,7 +158,7 @@
                 aria-hidden="false" tabindex="0">
                 <div class="testimonial-text">
                   <p class="text">“開始使用，請點選 創建留言板 或 進入留言板，按右上方
-                    保存留言 可以保存留言們”
+                    列印留言 可以列印留言們”
                   </p>
                 </div>
                 <div class="testimonial-author d-sm-flex justify-content-between">
@@ -166,21 +171,6 @@
                       <span class="sub-title">ncchen</span>
                     </div>
                   </div>
-                  <!--<div class="author-review">
-                        <ul class="star">
-                            <li><i class="lni lni-star-filled"></i>
-                            </li>
-                            <li><i class="lni lni-star-filled"></i>
-                            </li>
-                            <li><i class="lni lni-star-filled"></i>
-                            </li>
-                            <li><i class="lni lni-star-filled"></i>
-                            </li>
-                            <li><i class="lni lni-star-filled"></i>
-                            </li>
-                        </ul>
-                        <span class="review">( 7 Reviews )</span>
-                    </div>-->
                 </div>
               </div>
             </div>
@@ -284,9 +274,8 @@
           </div>
           <div class="modal-footer">
             <div class="light-rounded-buttons"><button type="button" class="main-btn light-rounded-five"
-                data-dismiss="modal"><span class="lni lni-trash-can"></span><span
-                  class="lni lni-exit"></span>取消</button>
-              <button type="submit" class="main-btn light-rounded-five"><span class="lni lni-save"></span>做一個💕</button>
+                data-dismiss="modal"><span class="lni lni-exit"></span>取消</button>
+              <button type="submit" class="main-btn light-rounded-five"><span class="lni lni-save"></span>創建</button>
             </div>
           </div>
         </form>
@@ -329,7 +318,7 @@
             <div class="light-rounded-buttons"><button type="button" class="main-btn light-rounded-five"
                 data-dismiss="modal"><span class="lni lni-trash-can"></span><span
                   class="lni lni-exit"></span>取消</button>
-              <button type="submit" class="main-btn light-rounded-five"><span class="lni lni-enter"></span>逃粗來</button>
+              <button type="submit" class="main-btn light-rounded-five"><span class="lni lni-enter"></span>進入</button>
             </div>
           </div>
         </form>
@@ -352,13 +341,19 @@
           </ul> <!-- social -->
           <div class="footer-support text-center">
             <span>這個網頁如果爛掉不能用惹，請來聯絡畢籌會活動組，不好意思😓</span>
-            <span>文華高中30屆畢籌會</span>
             <span>0607🚸《一起逃出烤箱，來一場冒險之旅吧！》</span>
           </div>
           <div class="copyright text-center mt-35">
-            <p class="text">Designed by <a href="https://uideck.com" rel="nofollow">UIdeck</a> and
+            <p class="text">Template designed by <a href="https://uideck.com" rel="nofollow">UIdeck</a> and
               Built-with <a rel="nofollow" href="https://ayroui.com">Ayro
                 UI</a> </p>
+            <div class="copyright text-center mt-10">
+              <p class="text">Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a
+                  href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
+            </div>
+            <div class="copyright text-center mt-10">
+              <p class="text">Site design / Logo © 2021 文華高中30屆畢籌會</p>
+            </div>
           </div> <!--  copyright -->
         </div>
       </div> <!-- row -->
@@ -431,11 +426,11 @@
   <!--====== JS Cookie js ======-->
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
-  <!--====== html2canvas js ======-->
-  <script src="./assets/js/html2canvas.js"></script>
-
   <!--======Bulltin js======-->
   <script src="assets/js/bulletin.js"></script>
+
+  <!--====== html2canvas js ======-->
+  <!---=== <script src="./assets/js/html2canvas.js"></script> ===-->
 
 </body>
 

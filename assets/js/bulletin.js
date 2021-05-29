@@ -102,19 +102,41 @@ $("#create-form").submit(function () {
   return false;
 });
 
+// copy popover auto hide
+$("#create-form button:nth-child(1)").on("shown.bs.popover", function () {
+  setTimeout(function () {
+    $("#create-form button:nth-child(1)").popover("hide");
+  }, 2000);
+});
 // screenshot
-$("#save_img").click(function () {
-  html2canvas(document.querySelector("#services")).then((canvas) => {
-    saveAs(
-      canvas
-        .toDataURL("image/jpeg")
-        .replace("image/jpeg", "image/octet-stream"),
-      "whsh-bulletin-board.jpg"
-    );
-  });
+$("#save_page").click(function () {
+  $(".navbar-area.sticky").css({ padding: "0" });
+  window.print();
+  $(".navbar-area.sticky").css({ padding: "10px 0" });
+  // old school screencapture
+  //   html2canvas(document.querySelector("#services")).then((canvas) => {
+  //     saveAs(
+  //       canvas
+  //         .toDataURL("image/jpeg")
+  //         .replace("image/jpeg", "image/octet-stream"),
+  //       "whsh-bulletin-board.jpg"
+  //     );
+  //   });
 });
 
-// create action
+// input error
+function show_error_input(selector, error_message, original_message) {
+  $(selector).removeClass("default").addClass("error");
+  $(selector + " input")
+    .val("")
+    .blur()
+    .attr("placeholder", error_message);
+  $(selector + " input").focus(function () {
+    $(selector).removeClass("error").addClass("default");
+    $(selector + " input").attr("placeholder", original_message);
+  });
+}
+// create btn click!
 $("#create-form > div.modal-footer > div > button:nth-child(2)").click(
   function () {
     var $inputs = $("#create-form :input");
@@ -128,28 +150,137 @@ $("#create-form > div.modal-footer > div > button:nth-child(2)").click(
             .val()
             .replace(/</g, "&lt;")
             .replace(/>/g, "&gt;");
+          var invalid_str = ["+", "&", "="];
+          if (invalid_str.some((v) => $(this).val().includes(v))) {
+            show_error_input(
+              "#create-form .input-items",
+              "這個名字不行🥺",
+              "名字不能忘記窩🥺"
+            );
+            input_valid = false;
+            return false;
+          }
         } else {
-          alert("不能空白窩🥺");
+          show_error_input(
+            "#create-form .input-items",
+            "名字不能空白窩🥺",
+            "名字不能忘記窩🥺"
+          );
           input_valid = false;
           return false;
         }
       }
     });
     if (!input_valid) return false;
-    $(".preloader").fadeIn(200);
-    console.log(values);
+    $(".preloader").fadeIn(100);
     var db = firebase.firestore();
+
     db.collection("users")
-      .add({
-        user: values["user"],
-        post: [],
-      })
-      .then(function () {
-        window.open("./?p=" + values["user"], "_self");
+      .where("user", "==", values["user"])
+      .get()
+      .then((querySnapshot) => {
+        //sucess query data
+        querySnapshot.forEach((doc) => {
+          input_valid = false;
+        });
+        if (!input_valid) {
+          $(".preloader").fadeOut(100);
+          //user already exist
+          console.log("user already exist");
+          show_error_input(
+            "#create-form .input-items",
+            "這個名字已經有人使用過惹🥺",
+            "名字不能忘記窩🥺"
+          );
+        } else {
+          // new user!
+          console.log("new user!!");
+          db.collection("users")
+            .add({
+              user: values["user"],
+              post: [],
+            })
+            .then(function () {
+              $(".preloader").fadeOut(100);
+              $("#create-form label").text("🚀尼ㄉ專屬留言板網址");
+              $("#create-form .input-items")
+                .removeClass("default")
+                .addClass("success")
+                .css({ "border-color": "#4da422", color: "#4da422" });
+
+              $("#create-form .input-items i")
+                .removeClass("lni lni-user")
+                .addClass("lni lni-chrome");
+              $("#create-form .input-items input")
+                .val(
+                  window.location.href.split("?")[0] + "?p=" + values["user"]
+                )
+                .prop("disabled", true);
+              $("#create-form button:nth-child(1)").html(
+                '<span class="lni lni-share"></span>複製'
+              );
+              $("#create-form button:nth-child(1)").attr(
+                "data-toggle",
+                "popover"
+              );
+              $("#create-form button:nth-child(1)").attr(
+                "data-placement",
+                "bottom"
+              );
+              $("#create-form button:nth-child(1)").click(function () {
+                navigator.clipboard
+                  .writeText(
+                    window.location.href.split("?")[0] + "?p=" + values["user"]
+                  )
+                  .then(
+                    function () {
+                      $("#create-form button:nth-child(1)").attr(
+                        "title",
+                        "複製成功"
+                      );
+                      $("#create-form button:nth-child(1)").attr(
+                        "data-content",
+                        "趕快去分享吧！"
+                      );
+
+                      $("#create-form button:nth-child(1)").popover();
+                    },
+                    function (err) {
+                      $("#create-form button:nth-child(1)").attr(
+                        "title",
+                        "複製失敗"
+                      );
+                      $("#create-form button:nth-child(1)").attr(
+                        "data-content",
+                        "複製的功能只能用Chromeㄛ"
+                      );
+
+                      $("#create-form button:nth-child(1)").popover();
+
+                      console.error("Async: Could not copy text: ", err);
+                    }
+                  );
+              });
+              $("#create-form button:nth-child(1)").removeAttr("data-dismiss");
+
+              $("#create-form button:nth-child(2)").html(
+                '<span class="lni lni-car"></span>前往'
+              );
+              $("#create-form button:nth-child(2)").attr("type", "button");
+              $("#create-form button:nth-child(2)").attr(
+                "onclick",
+                "location.href='" + "./?p=" + values["user"] + "';"
+              );
+              // window.open("./?p=" + values["user"], "_self");
+            });
+        }
       })
       .catch((error) => {
         alert("創建失敗可能是資料酷爛掉或網路不佳🤒");
-        console.log("Error store post: ", error);
+        console.log(
+          "Error checking duplicate or create new user data: ",
+          error
+        );
         $(".preloader").fadeOut(200);
       });
     return false;
@@ -221,9 +352,6 @@ $("#send-form > div.modal-footer > div > button:nth-child(2)").click(
     $("#sendModal").modal("hide");
   }
 );
-
-// create btn click!
-$("").click(function () {});
 
 (function () {
   "use strict";
