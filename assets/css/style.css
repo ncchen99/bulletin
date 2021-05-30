@@ -3115,15 +3115,29 @@ p {
        10.SLIDER css 
 ===========================*/
 .carousel-item {
-  background-color: #0067f4;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/assets/images/background/background-desktop.jpg");
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
   position: relative;
+}
+@media (max-width: 767px) {
+  /* mobile */
+  .carousel-item {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url("/assets/images/background/background-mobile.jpg");
+    background-attachment: fixed;
+    background-size: contain;
+  }
 }
 .carousel-item::before {
   position: absolute;
   content: "";
   width: 33%;
   height: 100%;
-  background: -webkit-linear-gradient(
+  /* background: -webkit-linear-gradient(
     rgba(0, 103, 244, 0.3) 0%,
     rgba(43, 219, 220, 0.3) 100%
   );
@@ -3134,7 +3148,7 @@ p {
   background: linear-gradient(
     rgba(0, 103, 244, 0.3) 0%,
     rgba(43, 219, 220, 0.3) 100%
-  );
+  ); */
   top: 0;
   right: 15%;
   -webkit-transform: skewX(20deg);
