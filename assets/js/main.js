@@ -16,7 +16,7 @@ $(function () {
       $(".navbar-area img").attr("src", "assets/images/logo.svg");
     } else {
       $(".navbar-area").addClass("sticky");
-      $(".navbar-area img").attr("src", "assets/images/logo-2.svg");
+      $(".navbar-area img").attr("src", "assets/images/logo-64px.png");
     }
   });
 
