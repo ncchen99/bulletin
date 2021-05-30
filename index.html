@@ -230,39 +230,72 @@
         </div>
         <form id="send-form">
           <div class="modal-body">
-            <div class="contact-wrapper form-style-two">
 
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-input mt-15">
-                    <label>💳尼の名字</label>
-                    <div class="input-items default">
-                      <input name="name" type="text" placeholder="Name">
-                      <i class="lni lni-user"></i>
+            <div class="single-tabs tebs-three">
+              <ul class="nav nav-justified" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="active" id="tab-three-one-tab" data-bs-toggle="tab" href="#tab-three-one" role="tab"
+                    aria-controls="tab-three-one" aria-selected="true"> <i class="lni lni-vector"></i> TAB 01</a>
+                </li>
+                <li class="nav-item">
+                  <a id="tab-two-three-tab" data-bs-toggle="tab" href="#tab-three-two" role="tab"
+                    aria-controls="tab-three-two" aria-selected="false" class=""> <i class="lni lni-pizza"></i> TAB
+                    02</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade active show" id="tab-three-one" role="tabpanel"
+                  aria-labelledby="tab-three-one-tab">
+                  <div class="tab-text">
+
+                    <div class="contact-wrapper form-style-two">
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-input mt-15">
+                            <label>💳尼の名字</label>
+                            <div class="input-items default">
+                              <input name="name" type="text" placeholder="Name">
+                              <i class="lni lni-user"></i>
+                            </div>
+                          </div> <!-- form input -->
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-input mt-15">
+                            <label>📧伊媚兒</label>
+                            <div class="input-items default">
+                              <input type="email" name="email" placeholder="Email">
+                              <i class="lni lni-envelope"></i>
+                            </div>
+                          </div> <!-- form input -->
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-input mt-25">
+                            <label>😻留言內容</label>
+                            <div class="input-items default">
+                              <textarea name="content" placeholder="Massage"></textarea>
+                              <i class="lni lni-pencil-alt"></i>
+                            </div>
+                          </div> <!-- form input -->
+                        </div>
+                      </div>
+                      <!-- row -->
                     </div>
-                  </div> <!-- form input -->
+                  </div>
+
                 </div>
-                <div class="col-md-6">
-                  <div class="form-input mt-15">
-                    <label>📧伊媚兒</label>
-                    <div class="input-items default">
-                      <input type="email" name="email" placeholder="Email">
-                      <i class="lni lni-envelope"></i>
-                    </div>
-                  </div> <!-- form input -->
-                </div>
-                <div class="col-md-12">
-                  <div class="form-input mt-25">
-                    <label>😻留言內容</label>
-                    <div class="input-items default">
-                      <textarea name="content" placeholder="Massage"></textarea>
-                      <i class="lni lni-pencil-alt"></i>
-                    </div>
-                  </div> <!-- form input -->
+                <div class="tab-pane fade" id="tab-three-two" role="tabpanel" aria-labelledby="tab-three-two-tab">
+                  <div class="tab-text">
+                    <p class="text">Raw denim you probably haven’t heard of them jean shorts Austin. Nesciunt tofu
+                      stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan
+                      helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. <br><br> Cosby sweater eu banh
+                      mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis
+                      cardigan american apparel, butcher voluptate nisi qui.</p>
+                  </div>
                 </div>
               </div>
-              <!-- row -->
             </div>
+
           </div>
           <div class="modal-footer">
             <div class="light-rounded-buttons"><button type="button" class="main-btn light-rounded-five"
