@@ -55,24 +55,24 @@ function make_card(post) {
     `</p>
               </div>
               <div class="testimonial-author d-sm-flex justify-content-between">
-                  <div class="author-info d-flex align-items-center">` +
-    ("fb" in post
-      ? `<a class="my-a" href="` + post["fb"] + `">`
-      : `<a class="my-a" href="mailto:` + post["email"] + `">`) +
-    `<div class="author-image">
+                  <div class="author-info d-flex align-items-center"><div class="author-image">
                           <img src="` +
     post["img"] +
     `" alt="author">
                         </div>
                         <div class="author-name media-body">
-                            <h5 class="card-author-name name mt-10">` +
+                            <h5 class="name mt-10">` +
+    ("fb" in post
+      ? `<a class="my-a card-author-name" href="` + post["fb"] + `">`
+      : `<a class="my-a card-author-name" href="mailto:` +
+        post["email"] +
+        `">`) +
     post["name"] +
-    `</h5>
+    `</a> </h5>
                             <span class="sub-title">` +
     ("time" in post ? post["time"] : post["email"]) +
     `</span>
                         </div>
-                      </a> 
                   </div>
               </div>
           </div>
@@ -120,20 +120,39 @@ $("#create-form button:nth-child(1)").on("shown.bs.popover", function () {
     $("#create-form button:nth-child(1)").popover("hide");
   }, 2000);
 });
-// screenshot
-$("#save_page").click(function () {
-  $(".navbar-area.sticky").css({ padding: "0" });
-  window.print();
-  $(".navbar-area.sticky").css({ padding: "10px 0" });
-  // old school screencapture
-  //   html2canvas(document.querySelector("#services")).then((canvas) => {
-  //     saveAs(
-  //       canvas
-  //         .toDataURL("image/jpeg")
-  //         .replace("image/jpeg", "image/octet-stream"),
-  //       "whsh-bulletin-board.jpg"
-  //     );
-  //   });
+
+// old school screencapture
+//   html2canvas(document.querySelector("#services")).then((canvas) => {
+//     saveAs(
+//       canvas
+//         .toDataURL("image/jpeg")
+//         .replace("image/jpeg", "image/octet-stream"),
+//       "whsh-bulletin-board.jpg"
+//     );
+//   });
+
+$("#share_page").click(function () {
+  navigator.clipboard.writeText(window.location.href).then(
+    function () {
+      $("#share_page").text(" 已複製 ");
+      $("#share_page").css({
+        "border-color": "#25eb00",
+        "background-color": "#25eb00",
+      });
+      setTimeout(function () {
+        $("#share_page").html('複製 <i class="lni lni-link"></i>');
+        $("#share_page").css({ "border-color": "", "background-color": "" });
+      }, 2000);
+    },
+    function (err) {
+      $("#share_page").text("複製失敗");
+      setTimeout(function () {
+        $("#share_page").html('複製 <i class="lni lni-link"></i>');
+      }, 2000);
+
+      console.error("Async: Could not copy text: ", err);
+    }
+  );
 });
 
 // input error

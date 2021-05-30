@@ -3048,11 +3048,11 @@ p {
   color: #fff;
   border: 2px solid;
   border-radius: 4px;
-  -webkit-transition: all 0.3s ease-out 0s;
-  -moz-transition: all 0.3s ease-out 0s;
-  -ms-transition: all 0.3s ease-out 0s;
-  -o-transition: all 0.3s ease-out 0s;
-  transition: all 0.3s ease-out 0s;
+  -webkit-transition: all 0.2s ease-in 0.2s;
+  -moz-transition: all 0.2s ease-in 0.2s;
+  -ms-transition: all 0.2s ease-in 0.2s;
+  -o-transition: all 0.2s ease-in 0.2s;
+  transition: all 0.2s ease-in 0.2s;
 }
 .navbar-area .navbar .navbar-btn li a.light {
   border-color: #fff;
@@ -3073,6 +3073,9 @@ p {
   background-color: #fff;
   z-index: 999;
   position: fixed;
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: saturate(180%) blur(20px);
+  padding: 10px 0px;
   -webkit-box-shadow: 0px 10px 25px 0px rgba(18, 18, 18, 0.05);
   -moz-box-shadow: 0px 10px 25px 0px rgba(18, 18, 18, 0.05);
   box-shadow: 0 3px 6px 0 rgb(0 0 0 / 16%);

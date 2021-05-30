@@ -1,4 +1,7 @@
 @media print {
+  .navbar-area.sticky {
+    padding: 0;
+  }
   .single-testimonial {
     -webkit-print-color-adjust: exact;
   }

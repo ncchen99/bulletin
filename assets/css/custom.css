@@ -31,10 +31,5 @@
 
 .card-author-name {
   background-color: rgba(255, 255, 255, 0);
-  color: #121212 !important;
-}
-
-.card-author-name :hover {
-  background-color: rgba(255, 255, 255, 0);
-  color: #0056b3 !important;
+  color: #121212;
 }
