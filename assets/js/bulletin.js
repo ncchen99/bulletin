@@ -197,16 +197,9 @@ function make_send_card() {
 //===== choos gender
 // dropdown item onclick
 function choose_avatar(gender) {
-  if (gender == "boy")
-    $("#dropdownMenuButton")
-      .removeClass("girl")
-      .addClass("boy")
-      .text("👦 男生");
-  else
-    $("#dropdownMenuButton")
-      .removeClass("boy")
-      .addClass("girl")
-      .text("👧 女生");
+  if (gender == "boy") $("#dropdownMenuButton").text("👦 男生");
+  else if (gender == "girl") $("#dropdownMenuButton").text("👧 女生");
+  else $("#dropdownMenuButton").text("🧑‍🦱 尼說呢");
 }
 
 // do not reflash
@@ -501,9 +494,11 @@ $("#send-form button:nth-child(2)").click(function () {
         }
       }
     });
-    if ($("#dropdownMenuButton").hasClass("boy"))
+    if ($("#dropdownMenuButton").text() == "👦 男生")
       values["img"] = "./assets/images/user/user-boy-512px.jpg";
-    else values["img"] = "./assets/images/user/user-girl-512px.jpg";
+    else if ($("#dropdownMenuButton").text() == "👧 女生")
+      values["img"] = "./assets/images/user/user-girl-512px.jpg";
+    else values["img"] = "./assets/images/user/user-none-512px.jpg";
   }
   // check submit input legal
 
