@@ -468,10 +468,18 @@ $("#send-form button:nth-child(2)").click(function () {
         }
       }
     });
+
+    if (!fb_user_data.name) {
+      alert("連線facebook出錯！");
+      input_valid = false;
+      return false;
+    }
     values["name"] = fb_user_data.name;
     values["fb_id"] = fb_user_data.id;
-    values["img"] = fb_user_data.img;
-    values["email"] = fb_user_data.email;
+    values["img"] = fb_user_data.img
+      ? fb_user_data.img
+      : "./assets/images/user/user-none-512px.jpg";
+    values["email"] = fb_user_data.email ? fb_user_data.email : "未提供";
   } else {
     // traditional mode
     $inputs.each(function () {
