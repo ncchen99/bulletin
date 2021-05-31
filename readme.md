@@ -21,7 +21,4 @@
 | ![](https://i.imgur.com/AuRn5e0.png) | ![](https://i.imgur.com/asU0FX0.png)   | 
 
 
-## 全部前端😞
-![](https://i.imgur.com/xeLogXN.png)
-
-##### 文華讚💜
+## 💜我文華，宏我校風
