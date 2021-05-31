@@ -199,7 +199,7 @@ function make_send_card() {
 function choose_avatar(gender) {
   if (gender == "boy") $("#dropdownMenuButton").text("👦 男生");
   else if (gender == "girl") $("#dropdownMenuButton").text("👧 女生");
-  else $("#dropdownMenuButton").text("🧑‍🦱 尼說呢");
+  else $("#dropdownMenuButton").text("🧒 尼說呢");
 }
 
 // do not reflash
