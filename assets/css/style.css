@@ -3118,20 +3118,29 @@ p {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("/assets/images/background/background-desktop.jpg");
   /* background-position: center center; */
-  background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+}
+@media (max-width: 786px) {
+  /* mobile */
+  .carousel-item {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      url("/assets/images/background/background-tablet.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
 }
 @media (max-width: 480px) {
   /* mobile */
   .carousel-item {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
       url("/assets/images/background/background-mobile.jpg");
-    background-attachment: fixed;
     background-size: contain;
   }
 }
+
 .carousel-item::before {
   position: absolute;
   content: "";
@@ -4286,7 +4295,7 @@ p.form-message.error.form-message.error {
 
 /*===== BACK TO TOP =====*/
 
-.back-to-top:hover,     
+.back-to-top:hover,
 .back-to-top:active {
   transform: scale(1.2);
   box-shadow: 0px 4px 8px 0px rgb(0 0 0 / 50%);
