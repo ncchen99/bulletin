@@ -1,6 +1,7 @@
 // Global Variables
 var user_data;
 var docId;
+var fb_user_data = {};
 
 function init_database() {
   // Your web app's Firebase configuration
@@ -57,26 +58,54 @@ window.fbAsyncInit = function () {
 };
 
 function getUserProfileImg(userId) {
-  console.log("Welcome!  Fetching your information.... ");
-    FB.api(
-      "/" + userId + "/picture",
-      "GET",
-      { redirect: "false", height: 200, width: 200 },
-      function (img_response) {
-        console.log(img_response);
-      }
-    );
+  console.log("Fetching your img... ");
+  FB.api(
+    "/" + userId + "/picture",
+    "GET",
+    { redirect: "false", height: 200, width: 200 },
+    function (response) {
+      getImg(response["data"]["url"]);
+    }
+  );
 }
+
+function getImg(val) {
+  fb_user_data["img"] = val;
+  console.log(fb_user_data);
+}
+
 function testAPI() {
   // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
   console.log("Welcome!  Fetching your information.... ");
-  FB.api("/me", function (response) {
+  FB.api("/me?fields=email,name", function (response) {
+    fb_user_data = response;
+    $("#fb_input").html(
+      `
+        <div class="contact-wrapper form-style-two">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-input">
+                <label>😻留言內容</label>
+                <div class="input-items default">
+                  <textarea name="fb_content" placeholder="以` +
+        response.name +
+        `的身份留言"></textarea>
+                  <i class="lni lni-pencil-alt"></i>
+                </div>
+              </div>
+              <!-- form input -->
+            </div>
+          </div>
+          <!-- row -->
+        </div>`
+    );
     FB.api(
-      "/" + response.id + "/picture",
+      "/" + fb_user_data.id + "/picture",
       "GET",
       { redirect: "false", height: 200, width: 200 },
-      function (img_response) {
-        console.log(img_response);
+      function (response) {
+        fb_user_data.img = response["data"]["url"];
+        console.log(fb_user_data);
       }
     );
   });
@@ -165,6 +194,20 @@ function make_send_card() {
   </div> <!-- testimonial content wrapper -->
 </div> <!-- end card -->`;
 }
+//===== choos gender
+// dropdown item onclick
+function choose_avatar(gender) {
+  if (gender == "boy")
+    $("#dropdownMenuButton")
+      .removeClass("girl")
+      .addClass("boy")
+      .text("👦 男生");
+  else
+    $("#dropdownMenuButton")
+      .removeClass("boy")
+      .addClass("girl")
+      .text("👧 女生");
+}
 
 // do not reflash
 $("#send-form").submit(function () {
@@ -237,7 +280,6 @@ $("#enter-form button:nth-child(2)").click(function () {
   var input = $("#enter-form :input")[0]; //get input dom obj
   console.log(input);
   var value;
-  var input_valid = true;
   if ($(input).val() != null && $(input).val() != "") {
     value = $(input).val().replace(/</g, "&lt;").replace(/>/g, "&gt;");
     var invalid_str = ["+", "&", "="];
@@ -247,7 +289,6 @@ $("#enter-form button:nth-child(2)").click(function () {
         "找不到這個人的留言板🥺",
         "嗨嗨🌞"
       );
-      input_valid = false;
       return false;
     }
   } else {
@@ -256,7 +297,6 @@ $("#enter-form button:nth-child(2)").click(function () {
       "名字不能空白窩🥺",
       "嗨嗨🌞"
     );
-    input_valid = false;
     return false;
   }
   window.open("./?p=" + value, "_self");
@@ -410,35 +450,67 @@ $("#send-form button:nth-child(2)").click(function () {
   // var user_data = JSON.parse(Cookies.get("user_data"));
   // var docId = Cookies.get("doc.id");
 
-  // check submit input legal
   var $inputs = $("#send-form :input");
-  const default_avatars = "./assets/images/user-1.png";
   var values = {};
   var input_valid = true;
-  $inputs.each(function () {
-    // get all the inputs into an array.
-    if (this.name != "") {
-      if ($(this).val() != null && $(this).val() != "") {
-        values[this.name] = $(this)
-          .val()
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;");
-      } else {
-        show_error_input(
-          $(this).parent(".input-items"),
-          "這格不能空白窩🥺",
-          $(this).attr("placeholder")
-        );
-        // todo change alret to input error
-        input_valid = false;
-        return false;
+  if ($("#tabs-icons-text-2-tab").hasClass("active")) {
+    //fb mode
+    $inputs.each(function () {
+      // get all the inputs into an array.
+      if (this.name == "fb_content") {
+        if ($(this).val() != null && $(this).val() != "") {
+          values["content"] = $(this)
+            .val()
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+        } else {
+          show_error_input(
+            $(this).parent(".input-items"),
+            "這格不能空白窩🥺",
+            $(this).attr("placeholder")
+          );
+          // todo change alret to input error
+          input_valid = false;
+          return false;
+        }
       }
-    }
-  });
+    });
+    values["name"] = fb_user_data.name;
+    values["fb_id"] = fb_user_data.id;
+    values["img"] = fb_user_data.img;
+    values["email"] = fb_user_data.email;
+  } else {
+    // traditional mode
+    $inputs.each(function () {
+      // get all the inputs into an array.
+      if (this.name != "" && this.name != "fb_content") {
+        if ($(this).val() != null && $(this).val() != "") {
+          values[this.name] = $(this)
+            .val()
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+        } else {
+          show_error_input(
+            $(this).parent(".input-items"),
+            "這格不能空白窩🥺",
+            $(this).attr("placeholder")
+          );
+          // todo change alret to input error
+          input_valid = false;
+          return false;
+        }
+      }
+    });
+    if ($("#dropdownMenuButton").hasClass("boy"))
+      values["img"] = "./assets/images/user/user-boy-512px.jpg";
+    else values["img"] = "./assets/images/user/user-girl-512px.jpg";
+  }
+  // check submit input legal
+
   if (!input_valid) return false;
 
   //start animation meanwhile store data and display it
-  values["img"] = "./assets/images/user/user-" + (getRandomInt(5) + 1) + ".png";
+  // values["img"] = "./assets/images/user/user-" + (getRandomInt(5) + 1) + ".png";
   var d = new Date();
   values["time"] =
     d.getFullYear() + "年 " + (d.getMonth() + 1) + "月 " + d.getDate() + "日";

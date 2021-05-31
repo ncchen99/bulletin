@@ -169,17 +169,14 @@ $(function () {
     }
   });
 
-  //Animate the scroll to yop
+  //Animate the scroll to top
   $(".back-to-top").on("click", function (event) {
     event.preventDefault();
-
     $("html, body").animate(
       {
-        scrollTop: document.body.scrollHeight - 1080,
+        scrollTop: document.body.scrollHeight - 1200,
       },
       500
     );
   });
-
-  //=====
 });
