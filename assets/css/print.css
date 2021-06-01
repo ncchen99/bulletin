@@ -9,6 +9,15 @@
     float: left;
     width: 30%;
   }
+  .back-to-top {
+    display: none;
+  }
+  a:link {
+    text-decoration: none !important;
+  }
+  a[href]:after {
+    content: none !important;
+  }
   .slider-content {
     z-index: 9;
     padding-top: 140px;

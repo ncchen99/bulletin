@@ -87,9 +87,9 @@ function testAPI() {
               <div class="form-input">
                 <label>😻留言內容</label>
                 <div class="input-items default">
-                  <textarea name="fb_content" placeholder="以<b>` +
+                  <textarea name="fb_content" placeholder="以` +
         response.name +
-        `</b>的身份留言"></textarea>
+        `的身份留言"></textarea>
                   <i class="lni lni-pencil-alt"></i>
                 </div>
               </div>
@@ -248,7 +248,7 @@ function copyToClipboard(copy_text) {
   return success;
 }
 
-$("#download_text").click(function () {
+$("#download_img").click(function () {
   $(".preloader").fadeIn(100);
   $("#download-img").load("./assets/download-img.html", function () {
     var innerHTML = "";
@@ -294,6 +294,7 @@ $("#download_text").click(function () {
     } catch (e) {
       alert("儲存失敗");
       document.getElementById("viewportMeta").setAttribute("content", vp);
+      $(".preloader").fadeOut(100);
     }
   });
 });
@@ -617,6 +618,8 @@ function render_all_cards(user) {
 
   if (user == null || user == "") {
     $("#text_under_title").text("\u00A0\u00A0快來創建自己的留言板🚀");
+    $("#download_img").hide();
+    $("#download_text").hide();
     $(".preloader").fadeOut(200);
   } else {
     // query user data
@@ -645,6 +648,8 @@ function render_all_cards(user) {
           }
           innerHTML += "</div>" + make_send_card();
           $("#board").html(innerHTML);
+          $("#download_img").show();
+          $("#download_text").show();
           $(".preloader").fadeOut(200);
         });
         if (!legal_user) {
