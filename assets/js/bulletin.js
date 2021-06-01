@@ -87,9 +87,9 @@ function testAPI() {
               <div class="form-input">
                 <label>😻留言內容</label>
                 <div class="input-items default">
-                  <textarea name="fb_content" placeholder="以` +
+                  <textarea name="fb_content" placeholder="以<b>` +
         response.name +
-        `的身份留言"></textarea>
+        `</b>的身份留言"></textarea>
                   <i class="lni lni-pencil-alt"></i>
                 </div>
               </div>
@@ -493,6 +493,10 @@ $("#send-form button:nth-child(2)").click(function () {
             .val()
             .replace(/</g, "&lt;")
             .replace(/>/g, "&gt;");
+          if (this.name == "content")
+            values[this.name] = values[this.name]
+              .replace(/ /g, " ")
+              .replace(/\n/g, "<br>");
         } else {
           show_error_input(
             $(this).parent(".input-items"),
