@@ -10,7 +10,7 @@
   <meta name="description" content="0607🚸《一起逃出烤箱，來一場冒險之旅吧！》">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1" id="viewportMeta">
 
   <meta name="author" content="NC Chen">
   <meta name="description" content="文華高中三十屆畢業紀念個人留言板🏠">
@@ -65,6 +65,7 @@
 
   <!--====== Custom CSS ======-->
   <link rel="stylesheet" href="assets/css/custom.css">
+
 </head>
 
 <body>
@@ -119,11 +120,16 @@
               </ul>
             </div>
             <div class="navbar-btn">
+
               <ul>
                 <li><a class="solid" href="javascript:viod(0)" id="share_page">複製 <i class="lni lni-link"></i></a>
                 </li>
+                <li id="download-btn"><a class="solid" href="javascript:viod(0)" id="download_text"><i
+                      class="lni lni-cloud-download"></i></i></a>
+                </li>
               </ul>
             </div>
+
             <!-- <div class="navbar-btn d-none d-sm-inline-block">
               <ul>
                 <li><a class="solid" href="#"></a></li>
@@ -500,7 +506,12 @@
 
   <!--====== fb img PART ENDS ======-->
 
-
+  <div class="container">
+    <div class="row">
+      <div class="col" id="download-img">
+      </div>
+    </div>
+  </div>
 
   <!--====== Jquery js ======-->
   <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
@@ -545,7 +556,7 @@
   <script src="assets/js/bulletin.js"></script>
 
   <!--====== html2canvas js ======-->
-  <!---=== <script src="./assets/js/html2canvas.js"></script> ===-->
+  <script src="./assets/js/html2canvas.js"></script>
 
   <!-- ===========Facebook sdk============= -->
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>

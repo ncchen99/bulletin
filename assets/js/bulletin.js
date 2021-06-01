@@ -230,28 +230,109 @@ $("#create-form button:nth-child(1)").on("shown.bs.popover", function () {
 //     );
 //   });
 
-$("#share_page").click(function () {
-  navigator.clipboard.writeText(window.location.href).then(
-    function () {
-      $("#share_page").text(" 已複製 ");
-      $("#share_page").css({
-        "border-color": "#25eb00",
-        "background-color": "#25eb00",
-      });
-      setTimeout(function () {
-        $("#share_page").html('複製 <i class="lni lni-link"></i>');
-        $("#share_page").css({ "border-color": "", "background-color": "" });
-      }, 2000);
-    },
-    function (err) {
-      $("#share_page").text("複製失敗");
-      setTimeout(function () {
-        $("#share_page").html('複製 <i class="lni lni-link"></i>');
-      }, 2000);
+function copyToClipboard(copy_text) {
+  var textarea = document.createElement("textarea");
+  textarea.textContent = copy_text;
+  document.body.appendChild(textarea);
 
-      console.error("Async: Could not copy text: ", err);
+  var selection = document.getSelection();
+  var range = document.createRange();
+  //  range.selectNodeContents(textarea);
+  range.selectNode(textarea);
+  selection.removeAllRanges();
+  selection.addRange(range);
+
+  var success = document.execCommand("copy");
+  selection.removeAllRanges();
+  document.body.removeChild(textarea);
+  return success;
+}
+
+$("#download_text").click(function () {
+  $(".preloader").fadeIn(100);
+  $("#download-img").load("./assets/download-img.html", function () {
+    var innerHTML = "";
+    for (var post_idx in user_data["post"]) {
+      var post = user_data["post"][post_idx];
+      innerHTML += `<div class="msg right-msg">
+      <div
+        class="msg-img"
+        style="background-image: url(`;
+      innerHTML += post["img"] + `)"></div>`;
+      innerHTML += `<div class="msg-bubble">
+      <div class="msg-info">
+        <div class="msg-info-name">`;
+      innerHTML += post["name"] + `</div><div class="msg-info-time">`;
+      innerHTML += post["time"] + `</div></div><div class="msg-text">`;
+      innerHTML +=
+        post["content"] +
+        `</div>
+      </div>
+    </div>`;
     }
-  );
+    $("#main").html(innerHTML);
+    var vp = document.getElementById("viewportMeta").getAttribute("content");
+    window.scrollTo(0, 0);
+    try {
+      document
+        .getElementById("viewportMeta")
+        .setAttribute("content", "width=960");
+      html2canvas(document.querySelector("#main"), {
+        useCORS: true,
+        scale: 3,
+      }).then((canvas) => {
+        saveAs(
+          canvas
+            .toDataURL("image/jpeg")
+            .replace("image/jpeg", "image/octet-stream"),
+          "whsh-bulletin-board.jpg"
+        );
+        $("#download-img").html("");
+        $(".preloader").fadeOut(100);
+        document.getElementById("viewportMeta").setAttribute("content", vp);
+      });
+    } catch (e) {
+      alert("儲存失敗");
+      document.getElementById("viewportMeta").setAttribute("content", vp);
+    }
+  });
+});
+
+$("#share_page").click(function () {
+  if (copyToClipboard(window.location.href)) {
+    $("#share_page").text(" 已複製 ");
+    $("#share_page").css({
+      "border-color": "#25eb00",
+      "background-color": "#25eb00",
+    });
+    setTimeout(function () {
+      $("#share_page").html('複製 <i class="lni lni-link"></i>');
+      $("#share_page").css({ "border-color": "", "background-color": "" });
+    }, 2000);
+  } else {
+    $("#share_page").text("複製失敗");
+    setTimeout(function () {
+      $("#share_page").html('複製 <i class="lni lni-link"></i>');
+    }, 2000);
+    console.error("Async: Could not copy text: ", err);
+  }
+});
+$("#create-form button:nth-child(1)").click(function () {
+  if (copyToClipboard($("#create-form .input-items input").val())) {
+    $("#create-form button:nth-child(1)").attr("title", "複製成功");
+    $("#create-form button:nth-child(1)").attr(
+      "data-content",
+      "趕快去分享吧！"
+    );
+    $("#create-form button:nth-child(1)").popover();
+  } else {
+    $("#create-form button:nth-child(1)").attr("title", "複製失敗");
+    $("#create-form button:nth-child(1)").attr(
+      "data-content",
+      "可以試試看用Chromeㄛ"
+    );
+    $("#create-form button:nth-child(1)").popover();
+  }
 });
 
 // input error
@@ -372,6 +453,7 @@ $("#create-form button:nth-child(2)").click(function () {
             $("#create-form .input-items input")
               .val(window.location.href.split("?")[0] + "?p=" + values["user"])
               .prop("disabled", true);
+            $("#create-form button:nth-child(1)").removeAttr("data-dismiss");
             $("#create-form button:nth-child(1)").html(
               '<span class="lni lni-share"></span>複製'
             );
@@ -383,39 +465,6 @@ $("#create-form button:nth-child(2)").click(function () {
               "data-placement",
               "bottom"
             );
-            $("#create-form button:nth-child(1)").click(function () {
-              navigator.clipboard
-                .writeText(
-                  window.location.href.split("?")[0] + "?p=" + values["user"]
-                )
-                .then(
-                  function () {
-                    $("#create-form button:nth-child(1)").attr(
-                      "title",
-                      "複製成功"
-                    );
-                    $("#create-form button:nth-child(1)").attr(
-                      "data-content",
-                      "趕快去分享吧！"
-                    );
-                    $("#create-form button:nth-child(1)").popover();
-                  },
-                  function (err) {
-                    $("#create-form button:nth-child(1)").attr(
-                      "title",
-                      "複製失敗"
-                    );
-                    $("#create-form button:nth-child(1)").attr(
-                      "data-content",
-                      "複製的功能只能用Chromeㄛ"
-                    );
-                    $("#create-form button:nth-child(1)").popover();
-
-                    console.error("Async: Could not copy text: ", err);
-                  }
-                );
-            });
-            $("#create-form button:nth-child(1)").removeAttr("data-dismiss");
 
             $("#create-form button:nth-child(2)").html(
               '<span class="lni lni-car"></span>前往'
@@ -423,7 +472,11 @@ $("#create-form button:nth-child(2)").click(function () {
             $("#create-form button:nth-child(2)").attr("type", "button");
             $("#create-form button:nth-child(2)").attr(
               "onclick",
-              "location.href='" + "./?p=" + values["user"] + "';"
+              "location.href='" +
+                window.location.href.split("?")[0] +
+                "./?p=" +
+                values["user"] +
+                "';"
             );
             // window.open("./?p=" + values["user"], "_self");
           });
@@ -596,8 +649,7 @@ function render_all_cards(user) {
         });
         if (!legal_user) {
           alert("輸入的網址可能不正確🙁");
-          $("#text_under_title").text("\u00A0快來創建自己的留言板🚀");
-          $(".preloader").fadeOut(200);
+          window.open(window.location.href.split("?")[0], "_self");
         }
       })
       .catch((error) => {
