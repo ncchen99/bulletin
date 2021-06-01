@@ -162,10 +162,14 @@ $(function () {
 
   // Show or hide the sticky footer button
   $(window).on("scroll", function (event) {
-    if ($(this).scrollTop() < document.body.scrollHeight - 1300) {
-      $(".back-to-top").fadeIn(200);
-    } else {
-      $(".back-to-top").fadeOut(200);
+    const urlParams = new URLSearchParams(window.location.search);
+    var user = urlParams.get("p");
+    if (user != null && user != "") {
+      if ($(this).scrollTop() < document.body.scrollHeight - 1300) {
+        $(".back-to-top").fadeIn(200);
+      } else {
+        $(".back-to-top").fadeOut(200);
+      }
     }
   });
 
@@ -178,5 +182,8 @@ $(function () {
       },
       500
     );
+    setTimeout(function () {
+      $("#sendModal").modal("show");
+    }, 600);
   });
 });

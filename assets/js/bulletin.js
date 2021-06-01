@@ -470,7 +470,7 @@ $("#send-form button:nth-child(2)").click(function () {
     });
 
     if (!fb_user_data.name) {
-      alert("連線facebook出錯！");
+      alert("連線facebook出錯！可能需要先登入、授予權限！");
       input_valid = false;
       return false;
     }
@@ -485,7 +485,10 @@ $("#send-form button:nth-child(2)").click(function () {
     $inputs.each(function () {
       // get all the inputs into an array.
       if (this.name != "" && this.name != "fb_content") {
-        if ($(this).val() != null && $(this).val() != "") {
+        if (
+          ($(this).val() != null && $(this).val() != "") ||
+          this.name == "email"
+        ) {
           values[this.name] = $(this)
             .val()
             .replace(/</g, "&lt;")
@@ -536,7 +539,7 @@ $("#send-form button:nth-child(2)").click(function () {
       $(".preloader").fadeOut(200);
     })
     .catch((error) => {
-      alert("儲存失敗可能是資料酷爛掉或網路不佳🤒");
+      alert("儲存失敗可能是資料褲爛掉或網路不佳🤒");
       console.log("Error store post: ", error);
       $(".preloader").fadeOut(200);
     });
@@ -588,7 +591,7 @@ function render_all_cards(user) {
           $(".preloader").fadeOut(200);
         });
         if (!legal_user) {
-          alert("書入的網址可能不正確🙁");
+          alert("輸入的網址可能不正確🙁");
           $("#text_under_title").text("\u00A0快來創建自己的留言板🚀");
           $(".preloader").fadeOut(200);
         }
@@ -597,7 +600,6 @@ function render_all_cards(user) {
         $(".preloader").fadeOut(200);
         alert("程式裡面粗問題🥺");
         console.log("Error getting documents: ", error);
-        $(".preloader").fadeOut(200);
       });
   }
 }
@@ -611,7 +613,6 @@ function render_all_cards(user) {
     console.log("hello " + user);
     // init Firebase
     init_database();
-
     render_all_cards(user);
   });
 })();
