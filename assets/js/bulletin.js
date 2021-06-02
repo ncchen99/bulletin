@@ -20,16 +20,57 @@ function init_database() {
   firebase.analytics();
 }
 
+function getCookie(name) {
+  var dc = document.cookie;
+  var prefix = name + "=";
+  var begin = dc.indexOf("; " + prefix);
+  if (begin == -1) {
+    begin = dc.indexOf(prefix);
+    if (begin != 0) return null;
+  } else {
+    begin += 2;
+    var end = document.cookie.indexOf(";", begin);
+    if (end == -1) {
+      end = dc.length;
+    }
+  }
+  // because unescape has been deprecated, replaced with decodeURI
+  //return unescape(dc.substring(begin + prefix.length, end));
+  return decodeURI(dc.substring(begin + prefix.length, end));
+}
+
 function statusChangeCallback(response, status) {
   // Called with the results from FB.getLoginStatus().
   console.log("statusChangeCallback");
   console.log(response); // The current login status of the person.
   if (response.status === "connected") {
     // Logged into your webpage and Facebook.
-    if (Cookies.get("fb_status") == "0" && status == "init") {
-      $("#sendModal").modal("show");
-      Cookies.set("fb_status", "1");
+    if (getCookie("fb_status")) {
+      if (Cookies.get("fb_status") == "0" && status == "init") {
+        $("html, body").animate(
+          {
+            scrollTop: document.body.scrollHeight - 1200,
+          },
+          500
+        );
+
+        $("#tabs-icons-text-1-tab")
+          .attr("aria-selected", "false")
+          .removeClass("active");
+        $("#tabs-icons-text-2-tab")
+          .attr("aria-selected", "true")
+          .removeClass("active")
+          .addClass("active");
+        $("#tabs-icons-text-2")
+          .removeClass("active")
+          .removeClass("show")
+          .addClass("active")
+          .addClass("show");
+        $("#tabs-icons-text-1").removeClass("active").removeClass("show");
+        $("#sendModal").modal("show");
+      }
     }
+    Cookies.set("fb_status", "1");
     testAPI();
   } else {
     // Not logged into your webpage or we are unable to tell.
