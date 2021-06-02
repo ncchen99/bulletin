@@ -26,9 +26,14 @@ function statusChangeCallback(response, status) {
   console.log(response); // The current login status of the person.
   if (response.status === "connected") {
     // Logged into your webpage and Facebook.
-    testAPI(status);
+    if (Cookies.get("fb_status") == "0" && status == "init") {
+      $("#sendModal").modal("show");
+      Cookies.set("fb_status", "1");
+    }
+    testAPI();
   } else {
     // Not logged into your webpage or we are unable to tell.
+    Cookies.set("fb_status", "0");
     document.getElementById("status").innerHTML =
       "Please log " + "into this webpage.";
     console.log("Please log " + "into this webpage.");
@@ -74,10 +79,9 @@ function getImg(val) {
   console.log(fb_user_data);
 }
 
-function testAPI(status) {
+function testAPI() {
   // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
   console.log("Welcome!  Fetching your information.... ");
-  if (status != "init") $("#sendModal").modal("show");
   FB.api("/me?fields=email,name", function (response) {
     fb_user_data = response;
     $("#fb_input").html(
