@@ -669,7 +669,7 @@ function render_all_cards(user) {
           $("#download_text").show();
           $("#download_text").attr(
             "href",
-            "data:text/plain;charset=utf-8," + encodeURIComponent(plaintext)
+            "data:text/txt;charset=utf-8,\ufeff" + encodeURIComponent(plaintext)
           );
 
           $("#download_text").attr(
