@@ -134,6 +134,17 @@ function saveAs(uri, filename) {
 }
 
 //dirty Code
+function make_text(post) {
+  return (
+    post["name"] +
+    "\n" +
+    (post["email"] ? post["email"] + "\n" : "") +
+    post["time"] +
+    "\n" +
+    post["content"].replace(/ /g, " ").replace(/<br>/g, "\n") +
+    "\n\n"
+  );
+}
 function make_card(post) {
   return (
     `<div class="col-lg-6">
@@ -533,7 +544,7 @@ $("#send-form button:nth-child(2)").click(function () {
     values["img"] = fb_user_data.img
       ? fb_user_data.img
       : "./assets/images/user/user-none-512px.jpg";
-    values["email"] = fb_user_data.email ? fb_user_data.email : "未提供";
+    values["email"] = fb_user_data.email ? fb_user_data.email : "";
   } else {
     // traditional mode
     $inputs.each(function () {
@@ -551,6 +562,8 @@ $("#send-form button:nth-child(2)").click(function () {
             values[this.name] = values[this.name]
               .replace(/ /g, " ")
               .replace(/\n/g, "<br>");
+          if (this.name == "email")
+            values[this.name] = values[this.name].replace(/ /g, "");
         } else {
           show_error_input(
             $(this).parent(".input-items"),
@@ -641,15 +654,34 @@ function render_all_cards(user) {
           $("#title").text(user_data["user"] + "的🏠");
 
           $("#first_card").remove();
+          var plaintext = "留言板｜文華三十\n\n";
           var innerHTML = `<div class="row justify-content-center">`;
           for (var post_idx in user_data["post"]) {
             var post = user_data["post"][post_idx];
             innerHTML += make_card(post);
+            plaintext += make_text(post);
           }
+
           innerHTML += "</div>" + make_send_card();
+          plaintext += "㊗️畢業快樂🌞\n文華高中三十屆畢籌會";
           $("#board").html(innerHTML);
-          $("#download_img").show();
           $("#download_text").show();
+          $("#download_text").attr(
+            "href",
+            "data:text/plain;charset=utf-8," + encodeURIComponent(plaintext)
+          );
+
+          $("#download_text").attr(
+            "download",
+            "留言板文字檔 " +
+              new Date().getFullYear() +
+              "-" +
+              (new Date().getMonth() + 1) +
+              "-" +
+              new Date().getDate() +
+              ".txt"
+          );
+          $("#download_img").show();
           $(".preloader").fadeOut(200);
         });
         if (!legal_user) {
