@@ -667,11 +667,12 @@ function render_all_cards(user) {
           plaintext += "㊗️畢業快樂🌞\n文華高中三十屆畢籌會";
           $("#board").html(innerHTML);
           $("#download_text").show();
-          $("#download_text").attr(
-            "href",
-            "data:text/txt;charset=utf-8,\ufeff" + encodeURIComponent(plaintext)
-          );
 
+          var blob = new Blob(["\ufeff" + plaintext], {
+            type: "text/txt,charset=UTF-8",
+          }); //new way
+          var txtUrl = URL.createObjectURL(blob);
+          $("#download_text").attr("href", txtUrl);
           $("#download_text").attr(
             "download",
             "留言板文字檔 " +
