@@ -7,13 +7,13 @@ function init_database() {
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   var firebaseConfig = {
-    apiKey: "AIzaSyACHJIEEDVA7XiWztrYjili8iszNsAqMsg",
-    authDomain: "graduation-bulletin-board.firebaseapp.com",
-    projectId: "graduation-bulletin-board",
-    storageBucket: "graduation-bulletin-board.appspot.com",
-    messagingSenderId: "369892302318",
-    appId: "1:369892302318:web:150fa2423b25e23a4642ff",
-    measurementId: "G-T6DN3PTY4C",
+    apiKey: "AIzaSyAmqZsNXAx_KJZ2VCt6RGpih2ubfNVGY9E",
+    authDomain: "whsh-bulletin.firebaseapp.com",
+    projectId: "whsh-bulletin",
+    storageBucket: "whsh-bulletin.appspot.com",
+    messagingSenderId: "624785410332",
+    appId: "1:624785410332:web:03a31d592148d1fcedd2d9",
+    measurementId: "G-YFEZF90RJD",
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
