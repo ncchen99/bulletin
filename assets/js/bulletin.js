@@ -20,13 +20,13 @@ function init_database() {
   firebase.analytics();
 }
 
-function statusChangeCallback(response) {
+function statusChangeCallback(response, status) {
   // Called with the results from FB.getLoginStatus().
   console.log("statusChangeCallback");
   console.log(response); // The current login status of the person.
   if (response.status === "connected") {
     // Logged into your webpage and Facebook.
-    testAPI();
+    testAPI(status);
   } else {
     // Not logged into your webpage or we are unable to tell.
     document.getElementById("status").innerHTML =
@@ -39,7 +39,7 @@ function checkLoginState() {
   // Called when a person is finished with the Login Button.
   FB.getLoginStatus(function (response) {
     // See the onlogin handler
-    statusChangeCallback(response);
+    statusChangeCallback(response, "");
   });
 }
 
@@ -53,7 +53,7 @@ window.fbAsyncInit = function () {
 
   FB.getLoginStatus(function (response) {
     // Called after the JS SDK has been initialized.
-    statusChangeCallback(response); // Returns the login status.
+    statusChangeCallback(response, "init"); // Returns the login status.
   });
 };
 
@@ -74,9 +74,10 @@ function getImg(val) {
   console.log(fb_user_data);
 }
 
-function testAPI() {
+function testAPI(status) {
   // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
   console.log("Welcome!  Fetching your information.... ");
+  if (status != "init") $("#sendModal").modal("show");
   FB.api("/me?fields=email,name", function (response) {
     fb_user_data = response;
     $("#fb_input").html(
