@@ -521,7 +521,9 @@ $("#send-form button:nth-child(2)").click(function () {
           values["content"] = $(this)
             .val()
             .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;");
+            .replace(/>/g, "&gt;")
+            .replace(/ /g, " ")
+            .replace(/\n/g, "<br>");
         } else {
           show_error_input(
             $(this).parent(".input-items"),
