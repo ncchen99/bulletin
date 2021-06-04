@@ -694,7 +694,7 @@ function render_all_cards(user) {
           Cookies.set("doc.id", doc.id);
           Cookies.set("user_data", JSON.stringify(user_data));
 
-          $("#title").text(user_data["user"] + "的🏠");
+          $("#title").text(user_data["user"]);
 
           $("#first_card").remove();
           var plaintext = "留言板｜文華三十\n\n";
