@@ -232,24 +232,18 @@ function make_card(post) {
 }
 
 function make_send_card() {
-  return `<div class="row justify-content-center" id="send_card">
-  <div class="testimonial-content-wrapper testimonial-active slick-initialized slick-slider">
-      <div class="slick-track" style="opacity: 1;">
-          <div class="single-testimonial slick-slide slick-current slick-active my-send-card" data-slick-index="0"
-              aria-hidden="false" tabindex="0">
-              <div class="testimonial-text">
+  return `<div class="row justify-content-center mt-15" id="send_card">
               <div class="form-input light-rounded-buttons ">
                   <button class="main-btn el-btn light-rounded-four my-send-btn" data-toggle="modal" data-target="#sendModal">
                     <span>
                     <i class="lni lni-cloud-upload"></i>
+                    偶也要留言🔮
                     </span>
-                  偶也要留言🔮</button>
+                    　　　　　　
+                  </button>
                 </div>
               </div>
-          </div>
-      </div>
-  </div> <!-- testimonial content wrapper -->
-</div> <!-- end card -->`;
+          </div>`;
 }
 //===== choos gender
 // dropdown item onclick
@@ -681,6 +675,7 @@ function render_all_cards(user) {
     $("#text_under_title").text("\u00A0\u00A0快來創建自己的留言板🚀");
     $("#download_img").hide();
     $("#download_text").hide();
+    $(".back-to-top").hide();
     $(".preloader").fadeOut(200);
   } else {
     // query user data
