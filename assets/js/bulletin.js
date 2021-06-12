@@ -120,6 +120,10 @@ function getImg(val) {
   console.log(fb_user_data);
 }
 
+function setImg(val, id) {
+  if (id) $('img[name="' + id + '"]').attr("src", val);
+}
+
 function testAPI() {
   // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
   console.log("Welcome!  Fetching your information.... ");
@@ -207,8 +211,10 @@ function make_card(post) {
                   <div class="author-info d-flex align-items-center"><div class="author-image">
                           <img src="` +
     post["img"] +
-    `" alt="author">
-                        </div>
+    `" alt="author" name="` +
+    post["fb_id"] +
+    `">` +
+    `</div>
                         <div class="author-name media-body">
                             <h5 class="name mt-10">` +
     ("fb" in post
@@ -709,6 +715,19 @@ function render_all_cards(user) {
           plaintext += "㊗️畢業快樂🌞\n文華高中三十屆畢籌會";
           $("#board").html(innerHTML);
           $("#download_text").show();
+
+          for (var post_idx in user_data["post"]) {
+            var post = user_data["post"][post_idx];
+            if ("fb_id" in post)
+              FB.api(
+                "/" + post["fb_id"] + "/picture",
+                "GET",
+                { redirect: "false", height: 200, width: 200 },
+                function (response) {
+                  setImg(response["data"]["url"], post["fb_id"]);
+                }
+              );
+          }
 
           var blob = new Blob(["\ufeff" + plaintext], {
             type: "text/txt,charset=UTF-8",
