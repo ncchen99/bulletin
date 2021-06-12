@@ -716,6 +716,7 @@ function render_all_cards(user) {
           $("#board").html(innerHTML);
           $("#download_text").show();
 
+          //================FB Profile Image================
           for (var post_idx in user_data["post"]) {
             var post = user_data["post"][post_idx];
             if ("fb_id" in post)
@@ -728,7 +729,7 @@ function render_all_cards(user) {
                 }
               );
           }
-
+          
           var blob = new Blob(["\ufeff" + plaintext], {
             type: "text/txt,charset=UTF-8",
           }); //new way
