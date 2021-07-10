@@ -120,8 +120,10 @@ function getImg(val) {
   console.log(fb_user_data);
 }
 
-function setImg(val, id) {
-  if (id) $('img[name="' + id + '"]').attr("src", val);
+function setImg(val) {
+  $('img[name="' + val.match(/asid=(\d+)/g)[0].substring(5) + '"]').each(function () {
+    $(this).attr("src", val);
+  });
 }
 
 function testAPI() {
@@ -138,8 +140,8 @@ function testAPI() {
                 <label>😻留言內容</label>
                 <div class="input-items default">
                   <textarea name="fb_content" placeholder="以` +
-        response.name +
-        `的身份留言"></textarea>
+      response.name +
+      `的身份留言"></textarea>
                   <i class="lni lni-pencil-alt"></i>
                 </div>
               </div>
@@ -220,8 +222,8 @@ function make_card(post) {
     ("fb" in post
       ? `<a class="my-a card-author-name" href="` + post["fb"] + `">`
       : `<a class="my-a card-author-name" href="mailto:` +
-        post["email"] +
-        `">`) +
+      post["email"] +
+      `">`) +
     post["name"] +
     `</a> </h5>
                             <span class="sub-title">` +
@@ -531,10 +533,10 @@ $("#create-form button:nth-child(2)").click(function () {
             $("#create-form button:nth-child(2)").attr(
               "onclick",
               "location.href='" +
-                window.location.href.split("?")[0] +
-                "./?p=" +
-                values["user"] +
-                "';"
+              window.location.href.split("?")[0] +
+              "./?p=" +
+              values["user"] +
+              "';"
             );
             // window.open("./?p=" + values["user"], "_self");
           });
@@ -717,19 +719,22 @@ function render_all_cards(user) {
           $("#download_text").show();
 
           //================FB Profile Image================
+          var set_recode = [];
           for (var post_idx in user_data["post"]) {
             var post = user_data["post"][post_idx];
-            if ("fb_id" in post)
+            if ("fb_id" in post && post["fb_id"] && !set_recode.includes(post["fb_id"])) {
+              set_recode.push(post["fb_id"]);
               FB.api(
                 "/" + post["fb_id"] + "/picture",
                 "GET",
                 { redirect: "false", height: 200, width: 200 },
                 function (response) {
-                  setImg(response["data"]["url"], post["fb_id"]);
+                  setImg(response["data"]["url"]);
                 }
               );
+            }
           }
-          
+
           var blob = new Blob(["\ufeff" + plaintext], {
             type: "text/txt,charset=UTF-8",
           }); //new way
@@ -738,12 +743,12 @@ function render_all_cards(user) {
           $("#download_text").attr(
             "download",
             "留言板文字檔 " +
-              new Date().getFullYear() +
-              "-" +
-              (new Date().getMonth() + 1) +
-              "-" +
-              new Date().getDate() +
-              ".txt"
+            new Date().getFullYear() +
+            "-" +
+            (new Date().getMonth() + 1) +
+            "-" +
+            new Date().getDate() +
+            ".txt"
           );
           $("#download_img").show();
           $(".preloader").fadeOut(200);
